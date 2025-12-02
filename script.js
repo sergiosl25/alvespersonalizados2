@@ -12,7 +12,7 @@ function atualizarCalculos() {
   const custosExtras = parseNumero(document.getElementById("custosExtras").value);
   const lucro = parseNumero(document.getElementById("lucro").value);
 
-  const areaFolha = 21 * 29.7; // área da folha A4
+  const areaFolha = 20 * 28.7; // área da folha A4
 
   // Quantidade por folha (subtrai 2 para garantir)
   let quantidade = Math.floor(areaFolha / (largura * altura)) - 2;
@@ -74,3 +74,4 @@ document.querySelectorAll("input").forEach(input => {
 });
 
 window.addEventListener("load", carregarDados);
+
