@@ -14,8 +14,7 @@ function atualizarCalculos() {
 
   const areaFolha = 20 * 28.7; // área da folha A4
 
-  // Quantidade por folha (subtrai 2 para garantir)
-  let quantidade = Math.floor(areaFolha / (largura * altura)) - 2;
+  let quantidade = Math.floor(areaFolha / (largura * altura));
   if (isNaN(quantidade) || quantidade < 1) quantidade = 1;
   document.getElementById("quantidade").value = quantidade;
 
@@ -74,4 +73,5 @@ document.querySelectorAll("input").forEach(input => {
 });
 
 window.addEventListener("load", carregarDados);
+
 
