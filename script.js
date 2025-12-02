@@ -12,9 +12,10 @@ function atualizarCalculos() {
   const custosExtras = parseNumero(document.getElementById("custosExtras").value);
   const lucro = parseNumero(document.getElementById("lucro").value);
 
-  const areaFolha = 20 * 28.7; // área da folha A4
+  const larguraFolha = 20;
+  const alturaFolha = 28.7;
 
-  let quantidade = Math.floor(areaFolha / (largura * altura));
+  let quantidade = Math.floor(larguraFolha / largura) * (alturaFolha / altura);
   if (isNaN(quantidade) || quantidade < 1) quantidade = 1;
   document.getElementById("quantidade").value = quantidade;
 
@@ -73,5 +74,6 @@ document.querySelectorAll("input").forEach(input => {
 });
 
 window.addEventListener("load", carregarDados);
+
 
 
