@@ -1,153 +1,72 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alves Personalizados</title>
-<link rel="stylesheet" href="programa.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Preço Unitário + Papelaria</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <div class="header-left">
-    <img src="logo.png" alt="logo" class="logo">
+  <h1>Simulador de Preço Unitário - Folha A4</h1>
+
+  <div class="container">
+    <label>Largura (cm):</label>
+    <input type="text" id="largura" placeholder="ex: 5,0">
+
+    <label>Altura (cm):</label>
+    <input type="text" id="altura" placeholder="ex: 7,5">
+
+    <label>Qtd. por folha:</label>
+    <input type="text" id="quantidade" readonly>
+
+    <label>Preço da folha (R$):</label>
+    <input type="text" id="precoFolha" placeholder="ex: 1,20">
+
+    <label>Preço da impressão (R$):</label>
+    <input type="text" id="precoImpressao" placeholder="ex: 2,00">
+
+    <label>Custos extras (R$):</label>
+    <input type="text" id="custosExtras" placeholder="ex: 0,50">
+
+    <label>Lucro (%):</label>
+    <input type="text" id="lucro" value="100" readonly>
+
+    <label>Preço de venda (R$):</label>
+    <input type="text" id="precoVenda" readonly>
   </div>
-  <div class="header-center">
-  <h1>Alves Personalizados</h1>
-  <nav>
-    <button onclick="mostrar('clientes')">Clientes</button>
-    <button onclick="mostrar('produtos')">Produtos</button>
-    <button onclick="mostrar('vendas')">Vendas</button>
-    <button onclick="mostrar('registrosVendas')">Registros</button>
-  </nav>
-</header>
 
-<main>
-  <!-- Clientes -->
-  <section id="clientes" class="view">
-    <h2>Cadastro de Clientes</h2>
-    <div class="form">
-      <input type="text" id="nomeCliente" placeholder="Nome *">
-      <input type="text" id="telefoneCliente" placeholder="Telefone">
-      <button id="btnCadastrarCliente">Cadastrar Cliente</button>
-    </div>
-    <h3>Lista de Clientes</h3>
-    <table id="tabelaClientes">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Telefone</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </section>
+  <h2>Tabela de Produtos de Papelaria</h2>
+  <table id="tabelaPapelaria">
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Preço (R$)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Topo de bolo</td>
+        <td><input type="text" id="topoBolo" placeholder="ex: 5,00"></td>
+      </tr>
+      <tr>
+        <td>Impressão folha premium</td>
+        <td><input type="text" id="impPremium" placeholder="ex: 3,00"></td>
+      </tr>
+      <tr>
+        <td>Impressão folha desenho</td>
+        <td><input type="text" id="impDesenho" placeholder="ex: 2,50"></td>
+      </tr>
+      <tr>
+        <td>Impressão folha simples</td>
+        <td><input type="text" id="impSimples" placeholder="ex: 1,80"></td>
+      </tr>
+      <tr>
+        <td>Impressão folha adesivo</td>
+        <td><input type="text" id="impAdesivo" placeholder="ex: 4,00"></td>
+      </tr>
+    </tbody>
+  </table>
 
-  <!-- Produtos -->
-  <section id="produtos" class="view">
-    <h2>Cadastro de Produtos</h2>
-    <div class="form">
-      <input type="text" id="nomeProduto" placeholder="Nome do Produto *">
-      <input type="number" id="quantidadeProduto" placeholder="Quantidade *">
-      <input type="number" id="valorCompraProduto" placeholder="Valor de Compra (R$) *" step="0.01">
-      <input type="number" id="valorVendaProduto" placeholder="Valor de Venda (R$) *" step="0.01">
-      <button id="btnCadastrarProduto">Cadastrar Produto</button>
-    </div>
-    <h3>Lista de Produtos</h3>
-    <table id="tabelaProdutos">
-      <thead>
-        <tr>
-          <th>Produto</th>
-          <th>Qtd</th>
-          <th>Valor Compra</th>
-          <th>Valor Venda</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <p class="total">Total Compra: <span id="totalCompra">R$ 0,00</span> | Total Venda: <span id="totalVenda">R$ 0,00</span></p>
-  </section>
-
-  <!-- Vendas -->
-  <section id="vendas" class="view active">
-    <h2>Registrar Venda</h2>
-    <div class="form">
-      <select id="clienteSelect"></select>
-      <select id="produtoSelect"></select>
-      <input type="number" id="quantidadeVenda" placeholder="Quantidade">
-      <select id="formaPagamento">
-        <option value="Dinheiro">Dinheiro</option>
-        <option value="Cartão">Cartão</option>
-        <option value="Pix">Pix</option>
-      </select>
-      <button id="btnVender">Vender</button>
-    </div>
-    <h3>Resumo das Vendas</h3>
-    <table id="tabelaVendas">
-      <thead>
-        <tr>
-          <th>Data</th>
-          <th>Cliente</th>
-          <th>Produto</th>
-          <th>Qtd</th>
-          <th>Preço</th>
-          <th>Total</th>
-          <th>Pagamento</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <p class="total">Total Geral: <span id="totalGeral">R$ 0,00</span></p>
-  </section>
-
-  <!-- Registros -->
-  <section id="registrosVendas" class="view">
-    <h2>Registros de Vendas</h2>
-    <table id="tabelaRegistros">
-      <thead>
-        <tr>
-          <th>Data</th>
-          <th>Cliente</th>
-          <th>Produto</th>
-          <th>Qtd</th>
-          <th>Preço</th>
-          <th>Total</th>
-          <th>Pagamento</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <p class="total">Total Geral: <span id="totalGeralRegistros">R$ 0,00</span></p>
-    <button onclick="exportarRelatorio()">Exportar PDF</button>
-  </section>
-</main>
-
-<!-- Modal Edição -->
-<div id="modalEditar" class="modal">
-  <div class="modal-content">
-    <h3 id="modalEditarTitulo">Editar</h3>
-    <input type="text" id="modalEditarNome" placeholder="Nome">
-    <input type="text" id="modalEditarTelefone" placeholder="Telefone">
-    <input type="number" id="modalEditarQuantidade" placeholder="Quantidade">
-    <input type="number" id="modalEditarCompra" placeholder="Valor de Compra" step="0.01">
-    <input type="number" id="modalEditarVenda" placeholder="Valor de Venda" step="0.01">
-    <button id="btnSalvarEdicao">Salvar</button>
-    <button id="btnCancelarEdicao">Cancelar</button>
-  </div>
-</div>
-
-<!-- Modal Exclusão -->
-<div id="modalExcluir" class="modal">
-  <div class="modal-content">
-    <p>Deseja realmente excluir?</p>
-    <button id="btnConfirmarExcluir">Sim</button>
-    <button id="btnCancelarExcluir">Não</button>
-  </div>
-</div>
-
-<script src="programa.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
