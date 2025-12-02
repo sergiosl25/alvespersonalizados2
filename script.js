@@ -13,7 +13,7 @@ function atualizarCalculos() {
   const lucro = parseNumero(document.getElementById("lucro").value);
 
   const larguraFolha = 20;
-  const alturaFolha = 28.7;
+  const alturaFolha = 28;
 
   let quantidade = Math.floor(larguraFolha / largura) * (alturaFolha / altura);
   if (isNaN(quantidade) || quantidade < 1) quantidade = 1;
@@ -74,6 +74,7 @@ document.querySelectorAll("input").forEach(input => {
 });
 
 window.addEventListener("load", carregarDados);
+
 
 
 
