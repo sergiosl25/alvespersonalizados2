@@ -1,6 +1,6 @@
 body {
   font-family: "Segoe UI", Arial, sans-serif;
-  background: linear-gradient(135deg, #f7b42c, #fc575e);
+  background: linear-gradient(135deg, #1410e4, #02615c);
   color: #333;
   margin: 0;
   padding: 40px;
@@ -91,3 +91,4 @@ td input {
   border-radius: 6px;
   text-align: center;
 }
+
