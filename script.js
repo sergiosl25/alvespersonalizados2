@@ -7,15 +7,13 @@ function parseNumero(valor) {
 function atualizarCalculos() {
   const largura = parseNumero(document.getElementById("largura").value);
   const altura = parseNumero(document.getElementById("altura").value);
-  const precoFolha = parseNumero(document.getElementById("precoFolha").value);
-  const precoImpressao = parseNumero(document.getElementById("precoImpressao").value);
-  const custosExtras = parseNumero(document.getElementById("custosExtras").value);
+  const precoFolha = parseNumero(document.getElementById("precoFolha").value);  
   const lucro = parseNumero(document.getElementById("lucro").value);
 
   const larguraFolha = 20;
   const alturaFolha = 28;
 
-  let quantidade = Math.floor(larguraFolha / largura) * (alturaFolha / altura);
+  let quantidade = Math.floor(larguraFolha / largura) * Math.floor(alturaFolha / altura);
   if (isNaN(quantidade) || quantidade < 1) quantidade = 1;
   document.getElementById("quantidade").value = quantidade;
 
@@ -31,20 +29,9 @@ function salvarDados() {
   const dados = {
     largura: document.getElementById("largura").value,
     altura: document.getElementById("altura").value,
-    precoFolha: document.getElementById("precoFolha").value,
-    precoImpressao: document.getElementById("precoImpressao").value,
-    custosExtras: document.getElementById("custosExtras").value
+    precoFolha: document.getElementById("precoFolha").value,    
   };
   localStorage.setItem("simulador_preco", JSON.stringify(dados));
-
-  const papelaria = {
-    topoBolo: document.getElementById("topoBolo").value,
-    impPremium: document.getElementById("impPremium").value,
-    impDesenho: document.getElementById("impDesenho").value,
-    impSimples: document.getElementById("impSimples").value,
-    impAdesivo: document.getElementById("impAdesivo").value
-  };
-  localStorage.setItem("tabela_papelaria", JSON.stringify(papelaria));
 }
 
 function carregarDados() {
@@ -52,20 +39,9 @@ function carregarDados() {
   if (dados) {
     document.getElementById("largura").value = dados.largura;
     document.getElementById("altura").value = dados.altura;
-    document.getElementById("precoFolha").value = dados.precoFolha;
-    document.getElementById("precoImpressao").value = dados.precoImpressao;
-    document.getElementById("custosExtras").value = dados.custosExtras;
+    document.getElementById("precoFolha").value = dados.precoFolha;    
     atualizarCalculos();
-  }
-
-  const papelaria = JSON.parse(localStorage.getItem("tabela_papelaria"));
-  if (papelaria) {
-    document.getElementById("topoBolo").value = papelaria.topoBolo || '';
-    document.getElementById("impPremium").value = papelaria.impPremium || '';
-    document.getElementById("impDesenho").value = papelaria.impDesenho || '';
-    document.getElementById("impSimples").value = papelaria.impSimples || '';
-    document.getElementById("impAdesivo").value = papelaria.impAdesivo || '';
-  }
+  }  
 }
 
 // Atualiza sempre que algo for digitado
@@ -74,6 +50,7 @@ document.querySelectorAll("input").forEach(input => {
 });
 
 window.addEventListener("load", carregarDados);
+
 
 
 
