@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulador de Preço Unitário + Papelaria</title>
+  <title>Simulador de Preço Unitário</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Simulador de Preço Unitário - Folha A4</h1>
+  <h1>Simulador de Preço Unitário</h1>
 
   <div class="container">
     <label>Largura (cm):</label>
@@ -22,51 +22,14 @@
     <label>Preço da folha (R$):</label>
     <input type="text" id="precoFolha" placeholder="ex: 1,20">
 
-    <label>Preço da impressão (R$):</label>
-    <input type="text" id="precoImpressao" placeholder="ex: 2,00">
-
-    <label>Custos extras (R$):</label>
-    <input type="text" id="custosExtras" placeholder="ex: 0,50">
-
     <label>Lucro (%):</label>
     <input type="text" id="lucro" value="100" readonly>
 
     <label>Preço de venda (R$):</label>
     <input type="text" id="precoVenda" readonly>
   </div>
-
-  <h2>Tabela de Produtos de Papelaria</h2>
-  <table id="tabelaPapelaria">
-    <thead>
-      <tr>
-        <th>Produto</th>
-        <th>Preço (R$)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Topo de bolo</td>
-        <td><input type="text" id="topoBolo" placeholder="ex: 5,00"></td>
-      </tr>
-      <tr>
-        <td>Impressão folha premium</td>
-        <td><input type="text" id="impPremium" placeholder="ex: 3,00"></td>
-      </tr>
-      <tr>
-        <td>Impressão folha desenho</td>
-        <td><input type="text" id="impDesenho" placeholder="ex: 2,50"></td>
-      </tr>
-      <tr>
-        <td>Impressão folha simples</td>
-        <td><input type="text" id="impSimples" placeholder="ex: 1,80"></td>
-      </tr>
-      <tr>
-        <td>Impressão folha adesivo</td>
-        <td><input type="text" id="impAdesivo" placeholder="ex: 4,00"></td>
-      </tr>
-    </tbody>
-  </table>
-
+  
   <script src="script.js"></script>
 </body>
 </html>
+
